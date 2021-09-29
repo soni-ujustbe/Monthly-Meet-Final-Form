@@ -1,0 +1,170 @@
+ <div class="topSection">
+    <h6 class="sectionContent" >Monthly Networking Meet
+       
+    </h6>
+
+</div>
+
+    <div class="row">
+      <div class="col m3"></div>
+        <div class="col m6">
+            <div class="card">
+                <div class="card-content">
+                    <div class="card-title">Monthly Networking Meet</div>
+                        <p>(If there is no response put NA)</p>
+                        <div *ngIf="!submitted else showSubmitted">
+
+                        <span class="red-text">
+                        Required *
+                        </span>
+                        <div class="row">
+                        <form [formGroup]="ourForm" >
+
+                            <div class="input-field">
+                                 <div>
+                                    <label class="labelText" for="fullName">Enter Your Full Name (अपना पूरा नाम लिखे) *</label>
+                                <input type="text" id="fullName" class="validate"  formControlName="fullName" name="fullName" >
+                                
+                                </div>
+                                <div *ngIf="meetingForm.fullName.touched && meetingForm.fullName.errors?.required">
+                                    <span class="helper-text">This is required question</span>
+                                </div>
+                                
+                            </div>    
+                            
+                            <div class="input-field">
+                                <div>
+                                    <label class="labelText" for="couponCode">Enter your Coupon Code(अपना कूपन कोड दर्ज करें)</label>
+                                <input type="text" id="couponCode" class="validate"  formControlName="couponCode" name="couponCode" >
+                                
+                                </div>
+                                <div *ngIf="meetingForm.couponCode.touched && meetingForm.couponCode.errors?.required">
+                                    <span class="helper-text">This is required question</span>
+                                </div>
+                                
+                            </div>  
+
+                            <div class="input-field">
+                                <div>
+                                    <label class="labelText" for="listedPartner">Any Listed Partner you would like to Pass a Referral?(कोई भी सूचीबद्ध साथी जिसे आप रेफरल पास करना चाहते हैं?) *</label>
+                                <input type="text" id="listedPartner" class="validate"  formControlName="listedPartner" name="listedPartner" >
+                                
+                                </div>
+                                <div *ngIf="meetingForm.listedPartner.touched && meetingForm.listedPartner.errors?.required">
+                                    <span class="helper-text">This is required question</span>
+                                </div>
+                                
+                            </div> 
+
+                            <div class="radioButton">
+                                <label class="radioButton">choose any one*</label>
+                                <br>
+                                <p>
+                                <label>
+                                    <input name="yn" type="radio" (click)="radioChanged('Yes')" id="Yes" formControlName="yn" value="Yes">
+                                    <span>Yes</span>
+                                </label>
+                                </p> 
+                                <p>
+                                <label>
+                                    <input  name="yn" type="radio" (click)="radioChanged('No')" id="No" formControlName="yn" value="No">
+                                    <span >No</span>
+                                </label>
+                                </p>   
+                                <div *ngIf="meetingForm.listedPartner.touched && meetingForm.listedPartner.errors?.required">
+                                    <span class="helper-text">This is required question</span>
+                                </div>               
+                            </div>
+                            
+
+                             <!-- <div class="checkbtn">
+                                <label class="checklabel">choose any checkbox</label>
+                                <br>
+                                <p>
+                                <label>
+                                    <input name="check" type="checkbox" (click)="checkChanged('C1')" id="check1" formControlName="check" value="C1">
+                                    <span>C1</span>
+                                </label>
+                                </p> 
+                                <p>
+                                    <label>
+                                        <input name="check" type="checkbox" (click)="checkChanged('C2')" id="check2" formControlName="check" value="C2">
+                                        <span>C2</span>
+                                    </label>
+                                </p>  
+                                <p>
+                                    <label>
+                                        <input name="check" type="checkbox" (click)="checkChanged('C3')" id="check3" formControlName="check" value="C3">
+                                        <span>C3</span>
+                                    </label>
+                                </p>  
+                                <p>
+                                    <label>
+                                        <input name="check" type="checkbox" (click)="checkChanged('C4')" id="check4" formControlName="check" value="C4">
+                                        <span>C4</span>
+                                    </label>
+                                </p>  
+                                <div *ngIf="meetingForm.check.touched && meetingForm.check.errors?.required">
+                                    <span class="helper-text">This is required question</span>
+                                </div>             
+                            </div> -->
+                            
+
+                            
+                        
+
+                            <div class="checkBox-Btn">
+                                <label class="checkBoxButton" for="checkArray">check me*</label>
+                                <br>
+                                <p>
+                                <div *ngFor="let item of Data; let i=index">
+                                <label>
+                                    <input type="checkbox" class="checkBox-input" [value]="item.name" (change)="onCheckBoxChange($event)"   />
+                                  <span>{{item.name}}</span>
+                                </label>
+                                </div> 
+                                
+                                       
+                            </div>
+
+
+                            <div class="input-field">
+                                <div>
+                                    <label class="labelText" for="otoMeeting">From today's meeting, which Partner/Listed Partners you would like to connect to know more about them (One to One Meeting)? (आज की बैठक से, आप किस भागीदार / सूचीबद्ध भागीदार के बारे में अधिक जानने के लिए उनसे (वन टू वन मीटिंग) जुड़ना चाहेंगे? *</label>
+                                <input type="text" id="otoMeeting" class="validate"  formControlName="otoMeeting" name="otoMeeting">
+                                
+                                </div>
+                                <div *ngIf="meetingForm.otoMeeting.touched && meetingForm.otoMeeting.errors?.required">
+                                    <span class="helper-text">This is required question</span>
+                                </div>
+                                
+                            </div>     
+                            
+                           
+
+                            <div class="progress" *ngIf="submitting">
+                                <div class="indeterminate"></div>
+                            </div>
+                           <div>   
+                            <input type="submit" value="Submit" [disabled]="!ourForm.invalid" (click)="submitData(ourForm.value)"  class="btn">
+
+                            </div>    
+                        </form>
+                        </div>
+                                  
+                        </div>
+                    </div>
+                </div>
+
+                <ng-template #showSubmitted>
+                    <p class="green-text">Thanks you for submitting your form, We wish you all the best.</p>
+                </ng-template>
+
+            </div>    
+        <div class="col m3"></div>
+    <!-- </div>  -->
+
+     <!-- <div>
+        <h2>Monthly-Meet:</h2>
+        {{ currentMeet }}
+      </div> -->

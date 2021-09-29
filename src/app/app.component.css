@@ -1,0 +1,23 @@
+.topSection{
+
+background-color: rgb(103, 58, 183);
+color: rgb(255,255,255,1);
+height: 287px;
+padding: 100px ;
+padding-left: center;
+text-align: center;
+}
+.sectionContent{
+    align-items:center;
+    font-style: serif;
+    font-weight: 500 ;
+    font-size: 30px;
+}
+.card {
+    margin-top: -65px;
+    border-top: 10px solid rgb(174, 121, 255);
+  }
+  
+  .helper-text {
+    color: red;
+  }

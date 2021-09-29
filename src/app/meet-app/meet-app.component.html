@@ -1,0 +1,48 @@
+ <!-- <div class="topSection">
+    <h6 class="sectionContent" >Monthly Networking Meet
+       
+    </h6>
+
+</div>
+        <div class="row">
+            <div class="col m3"></div>
+                <div class="col m6">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-title">Monthly Networking Meet</div>
+                            <p>(If there is no response put NA)*</p>
+                            <div *ngIf="!submitted else showSubmitted">
+                                <span class="red-text">
+                                Required *
+                                </span>
+                                <div class="row">
+                                <form>
+        
+                                    <div [formGroup]="ourForm">
+                                    
+                                            <div>
+                                               <label class="labelText" for="fullName">Enter Your Full Name (अपना पूरा नाम लिखे) *</label>
+                                           <input type="text" id="fullName" class="validate"  formControlName="fullName" name="fullName" >
+                                           
+                                           </div>
+                                    </div>
+                                  
+                                       <div *ngIf="meetingForm.fullName.touched && meetingForm.fullName.errors?.required">
+                                           <span class="helper-text">This is required question</span>
+                                       </div>
+                                       
+                                    <div>   
+                                        <input type="submit"  value="Submit"  class="btn">
+                                    </div>   
+                                </form>
+                                </div>
+                                          
+                                </div>
+                            </div>
+                        </div>
+        
+                        
+                  
+
+
+         -->
