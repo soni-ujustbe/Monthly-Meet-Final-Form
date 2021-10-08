@@ -1,12 +1,9 @@
 import { NullTemplateVisitor } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder,FormControl,FormGroup,FormArray,Validators } from '@angular/forms';
+import { FormBuilder,FormControl,FormGroup,FormArray,Validators,AbstractControl, NgControl } from '@angular/forms';
 import { AngularFirestore, AngularFirestoreCollection } from  '@angular/fire/firestore';
-
-
-// import {meet} from '../monthly-meet.model';
-//import * as validUlr from 'valid-url';
-
+import { ValueTransformer } from '@angular/compiler/src/util';
+ 
 
 @Component({
   selector: 'monthly-meet',
@@ -16,68 +13,56 @@ import { AngularFirestore, AngularFirestoreCollection } from  '@angular/fire/fir
 export class MonthlyMeetComponent implements OnInit {
 
   private submissionForm:AngularFirestoreCollection<any>;
-
+isAvengerChecked : boolean = false;
+isInceptionChecked:boolean=false;
+isParasiteChecked:boolean=false;
+isJokerChecked:boolean=false;
+isShopliftersChecked:boolean=false
+// //create 5 prop of this...
+//ok
   ourForm: FormGroup;
  
   submitting:boolean=false;
   submitted:boolean=false;
-
+  displayError: boolean = false;
 
  
   Data: Array<any>= [
-    {id:1, name: 'avenger', value: 'Avenger' },
-    {id:2, name: 'inception', value: 'Inception' },
-    {id:3, name: 'parasite', value: 'Parasite' },
-    {id:4, name: 'joker', value: 'Joker' },
-    {id:5, name: 'shoplifters', value: 'Shoplifters' }
+    { name: 'avenger', value: 'Avenger' },
+    { name: 'inception', value: 'Inception' },
+    { name: 'parasite', value: 'Parasite' },
+    { name: 'joker', value: 'Joker' },
+    { name: 'shoplifters', value: 'Shoplifters' }
     
   ];
+  
 constructor(private fb: FormBuilder,private firestore:AngularFirestore)
 { 
-//   // this.ourForm=this.fb.group({
-//   //   fullName:new FormControl(null,[Validators.required]),
 
-//   //   couponCode: new FormControl( '',[ Validators.required]),
-
-//   //   listedPartner:new FormControl('', [Validators.required]),
-
-//   //   otoMeeting:new FormControl('',[Validators.required]),
-
-//   //   yn: new FormControl('', [Validators.required]),
-    
-//   //   emailFormArray:this.fb.array([],[Validators.required])
-
-//   // })
 }
-// 90% code write one few mistake 
-// right now i,m busy 
-
-//what time will u free can u please tell me
-
-//please call me at 7PM and 
-//ok sir thank u
-// with maintain your net...
 
 ngOnInit():void{
 
     this.submissionForm=this.firestore.collection('submissions');
+
   
     this.ourForm =this.fb.group({
          
-        fullName: ['', Validators.required],
+        fullName:['', Validators.compose([Validators.required])],
 
-        couponCode: ['', Validators.required],
+        couponCode:['', Validators.compose([Validators.required])],
 
-        listedPartner: ['', Validators.required],
+        listedPartner: ['',Validators.compose([ Validators.required])],
 
-        otoMeeting: ['', Validators.required],
+        otoMeeting:['', Validators.compose([Validators.required])],
 
-        yn: ['', Validators.required],
+        yn: ['', Validators.compose([Validators.required])],
         
-        check: ['', Validators.required],
-        // emailFormArray:this.fb.array([],[Validators.required])
+        // checkboxdata: ['', Validators.required],
+        // checkArray: this.fb.array([],[Validators.required])
 
-
+     
+        
      });
      
    
@@ -85,69 +70,109 @@ ngOnInit():void{
   get meetingForm(){
     return this.ourForm.controls;
   }
-//   // get currentMeet() {
-//   //    return JSON.stringify(this.model);
-//   //    }
-// // this.value=fb.collection('submissions').valueChanges();
 
-onCheckBoxChange(checkval:any){
 
-  console.log(checkval);
-  // const _id=id["id"]
+onCheckBoxChange(e:any) {
+  // console.log(e);
+  console.log(e.target.value);   //using this console nly if i used this console.log in the function see
+  switch(e.target.value) {
+    case 'Avenger':
+      this.isAvengerChecked = e.target.checked;
+      // code block
+      break;
+    case 'Inception':
+      this.isInceptionChecked = e.target.checked;
+      // code block
+      break;
+    case 'Parasite':
+      this.isParasiteChecked = e.target.checked;
+      break;
+    case 'Joker':
+      this.isJokerChecked = e.target.checked;
+      break;
+    case 'Shoplifters':
+      this.isShopliftersChecked = e.target.checked;
+      break;
+    default:
+      break;
+  //     // code block
+  }
+  console.log(this.isAvengerChecked, this.isInceptionChecked, this.isParasiteChecked, this.isJokerChecked, this.isShopliftersChecked);
+  //   // console.log(checkArray);
 
-  // const name=id["name"]
-  // const emailFormArray= <FormArray>this.ourForm.controls.checkArray;
-  //  const checkArray:FormArray=this.ourForm.get('checkArray') as FormArray;
-  
-  // if(e.isChecked){
-  //   emailFormArray.push(new FormControl({id}));
-   
-  //    checkArray.push(new FormControl(e.target.value));
-      
-  // }else{
+  // const checkArray: FormArray = this.ourForm.get('checkArray') as FormArray;
 
-  //  let index= emailFormArray.findIndex(x => x.value == {id});
-  //   checkArray.removeAt(index);
-    // let i: number=0;
-    // checkArray.controls.forEach((item :FormControl)=>{
-    //   if(item.value == e.target.value){
-    //     checkArray.removeAt(i);
-    //     return;
-    //   }  
-    //   i++;
-   // })
-   // }
- // console.log(checkval);
-//please show the task bar
+  // if (e.target.checked) {
+  //   checkArray.push(new FormControl(e.target.value));
+  // } else {
+  //   let i: number = 0;
+  //   checkArray.controls.forEach((item: FormControl) => {
+  //     if (item.value == e.target.value) {
+  //       checkArray.removeAt(i);
+  //       return;
+  //     }
+  //     i++;
+  //   });
+  // }
+
+}
+submitForm() {
+  console.log(this.ourForm.value);
 }
 
- // submitForm(){
-// this.submitted=true;
-// console.log(this.ourForm.value);
- // } 
-// 
 radioChanged(val:String){
   
-        console.log(val)
-      }
+        console.log(val);
+}
 
-  submitData(value:any){
-       // console.log(this.submitted);
-        
-      // this.fb.list('value').push({check:this.});
-      // this.value='';
-        this.submitting=true; 
-        this.submissionForm.add(value).then(res=>{
+submitData(){
+      if(this.ourForm.value.fullName == '' || this.ourForm.value.couponCode == '' || this.ourForm.value.listedPartner == '' || this.ourForm.value.yn == '') {
+        this.displayError = true;
+        return;
+      }
+             
+        var arrlst = [];
+        if(this.isAvengerChecked)
+        {
+          arrlst.push('avenger');
+        }
+        if(this.isInceptionChecked)
+        {
+          arrlst.push('inception');
+        }
+        if(this.isJokerChecked)
+        {
+          arrlst.push('joker');
+        }
+        if(this.isParasiteChecked)
+        {
+          arrlst.push('parasite');
+        }
+        if(this.isShopliftersChecked)
+        {
+          arrlst.push('shoplifters');
+        }
+        if(arrlst.length == 0) {
+          this.displayError = true;
+        return;
+        }
+        this.submitting=true;
+        var dataToSave= {
+          fullName : this.ourForm.value.fullName,
+          couponCode : this.ourForm.value.couponCode,
+          listedPartner : this.ourForm.value.listedPartner,
+          otoMeeting : this.ourForm.value.otoMeeting,
+          yn : this.ourForm.value.yn,
+          checklist: arrlst
+        }
+        this.submissionForm.add(dataToSave).then(res=>{
           this.submitted=true;
           console.log('Data Added in Database'); 
-           console.log(value); 
+           console.log(dataToSave); //now test once
         }).catch(err=> console.log(err)
       ).finally(()=>{
         this.submitting=false;
       })
-
-      }
+    }
     
-
-
 }

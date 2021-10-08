@@ -4,11 +4,11 @@ import { AngularFireModule } from '@angular/fire';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { MonthlyMeetComponent } from './monthly-meet/monthly-meet.component';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { HttpClientModule } from '@angular/common/http';
+// import { HttpClientModule } from '@angular/common/http';
 import { MeetAppComponent } from './meet-app/meet-app.component';
 
 
@@ -23,9 +23,8 @@ import { MeetAppComponent } from './meet-app/meet-app.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'always'}),
+    ReactiveFormsModule,
     AngularFirestoreModule,
-    HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase)
 
   ],

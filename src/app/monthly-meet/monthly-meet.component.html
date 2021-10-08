@@ -18,17 +18,17 @@
                         Required *
                     </span>
                     <div class="row">
-                        <form [formGroup]="ourForm" (ngSubmit)="submitForm()" novalidate>
+                        <form [formGroup]="ourForm" (ngSubmit)="submitData()" novalidate>
 
                             <div class="input-field">
                                 <div>
                                     <label class="labelText" for="fullName">Enter Your Full Name (अपना पूरा नाम लिखे)
                                         *</label>
                                     <input type="text" id="fullName" class="validate" formControlName="fullName"
-                                        name="fullName">
+                                        name="fullName" required>
 
                                 </div>
-                                <div *ngIf="meetingForm.fullName.touched && meetingForm.fullName.errors?.required">
+                                <div *ngIf="ourForm.get('fullName').hasError('required') && displayError">
                                     <span class="helper-text">This is required question</span>
                                 </div>
 
@@ -39,10 +39,10 @@
                                     <label class="labelText" for="couponCode">Enter your Coupon Code(अपना कूपन कोड दर्ज
                                         करें)</label>
                                     <input type="text" id="couponCode" class="validate" formControlName="couponCode"
-                                        name="couponCode">
+                                        name="couponCode" required>
 
                                 </div>
-                                <div *ngIf="meetingForm.couponCode.touched && meetingForm.couponCode.errors?.required">
+                                <div *ngIf="ourForm.get('couponCode').hasError('required') && displayError">
                                     <span class="helper-text">This is required question</span>
                                 </div>
 
@@ -54,11 +54,11 @@
                                         Pass a Referral?(कोई भी सूचीबद्ध साथी जिसे आप रेफरल पास करना चाहते हैं?)
                                         *</label>
                                     <input type="text" id="listedPartner" class="validate"
-                                        formControlName="listedPartner" name="listedPartner">
+                                        formControlName="listedPartner" name="listedPartner" required>
 
                                 </div>
                                 <div
-                                    *ngIf="meetingForm.listedPartner.touched && meetingForm.listedPartner.errors?.required">
+                                    *ngIf="ourForm.get('listedPartner').hasError('required') && displayError">
                                     <span class="helper-text">This is required question</span>
                                 </div>
 
@@ -70,19 +70,19 @@
                                 <p>
                                     <label>
                                         <input name="yn" type="radio" (click)="radioChanged('Yes')" id="Yes"
-                                            formControlName="yn" value="Yes">
+                                            formControlName="yn" value="Yes" required>
                                         <span>Yes</span>
                                     </label>
                                 </p>
                                 <p>
                                     <label>
                                         <input name="yn" type="radio" (click)="radioChanged('No')" id="No"
-                                            formControlName="yn" value="No">
+                                            formControlName="yn" value="No" required>
                                         <span>No</span>
                                     </label>
                                 </p>
                                 <div
-                                    *ngIf="meetingForm.listedPartner.touched && meetingForm.listedPartner.errors?.required">
+                                    *ngIf="ourForm.get('yn').hasError('required') && displayError">
                                     <span class="helper-text">This is required question</span>
                                 </div>
                             </div>
@@ -122,8 +122,6 @@
 
 
 
-
-
                             <div class="checkBox-Btn">
                                 <label class="checkBoxButton" >check me*</label>
                                 <br>
@@ -131,13 +129,14 @@
                                 <div *ngFor="let data of Data; let i=index">
                                     <label>
                                         <input type="checkbox" name="checkboxdata" class="checkBox-input"
-                                            [value]="data.value" (change)="onCheckBoxChange($event)" />
+                                            [value]="data.value" (change)="onCheckBoxChange($event)" required>
                                         <span>{{data.name}}</span>
                                     </label>
                                 </div>
 
-
                             </div>
+
+                            
                             <!-- <p class="error" *ngIf="this.meetingForm.controls['checkArray'].errors?.required">
                                 Checkbox is required, select atleast one value.
                             </p> -->
@@ -149,10 +148,10 @@
                                         (आज की बैठक से, आप किस भागीदार / सूचीबद्ध भागीदार के बारे में अधिक जानने के लिए
                                         उनसे (वन टू वन मीटिंग) जुड़ना चाहेंगे? *</label>
                                     <input type="text" id="otoMeeting" class="validate" formControlName="otoMeeting"
-                                        name="otoMeeting">
+                                        name="otoMeeting" >
 
                                 </div>
-                                <div *ngIf="meetingForm.otoMeeting.touched && meetingForm.otoMeeting.errors?.required">
+                                <div *ngIf="ourForm.get('otoMeeting').hasError('required') && displayError">
                                     <span class="helper-text">This is required question</span>
                                 </div>
 
@@ -164,8 +163,7 @@
                                 <div class="indeterminate"></div>
                             </div>
                             <div>
-                                <input type="submit" value="Submit" [disabled]="!ourForm.invalid"
-                                    (click)="submitData(ourForm.value)" class="btn">
+                                <input type="submit" value="Submit" class="btn">
 
                             </div>
                         </form>
