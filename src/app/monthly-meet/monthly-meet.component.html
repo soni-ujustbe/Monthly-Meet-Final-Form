@@ -18,7 +18,7 @@
                         Required *
                     </span>
                     <div class="row">
-                        <form [formGroup]="ourForm" (ngSubmit)="submitData()" novalidate>
+                        <form [formGroup]="ourForm" (ngSubmit)="submitForm()" novalidate>
 
                             <div class="input-field">
                                 <div>
@@ -88,40 +88,7 @@
                             </div>
 
 
-                            <!-- <div class="checkbtn">
-                                <label class="checklabel">choose any checkbox</label>
-                                <br>
-                                <p>
-                                <label>
-                                    <input name="check" type="checkbox" (click)="checkChanged('C1')" id="check1" formControlName="check" value="C1">
-                                    <span>C1</span>
-                                </label>
-                                </p> 
-                                <p>
-                                    <label>
-                                        <input name="check" type="checkbox" (click)="checkChanged('C2')" id="check2" formControlName="check" value="C2">
-                                        <span>C2</span>
-                                    </label>
-                                </p>  
-                                <p>
-                                    <label>
-                                        <input name="check" type="checkbox" (click)="checkChanged('C3')" id="check3" formControlName="check" value="C3">
-                                        <span>C3</span>
-                                    </label>
-                                </p>  
-                                <p>
-                                    <label>
-                                        <input name="check" type="checkbox" (click)="checkChanged('C4')" id="check4" formControlName="check" value="C4">
-                                        <span>C4</span>
-                                    </label>
-                                </p>  
-                                <div *ngIf="meetingForm.check.touched && meetingForm.check.errors?.required">
-                                    <span class="helper-text">This is required question</span>
-                                </div>             
-                            </div> -->
-
-
-
+                            
                             <div class="checkBox-Btn">
                                 <label class="checkBoxButton" >check me*</label>
                                 <br>
@@ -135,8 +102,6 @@
                                 </div>
 
                             </div>
-
-                            
                             <!-- <p class="error" *ngIf="this.meetingForm.controls['checkArray'].errors?.required">
                                 Checkbox is required, select atleast one value.
                             </p> -->
