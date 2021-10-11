@@ -74,7 +74,7 @@ ngOnInit():void{
 
 onCheckBoxChange(e:any) {
   // console.log(e);
-  console.log(e.target.value);   //using this console nly if i used this console.log in the function see
+  console.log(e.target.value);  
   switch(e.target.value) {
     case 'Avenger':
       this.isAvengerChecked = e.target.checked;
@@ -116,16 +116,14 @@ onCheckBoxChange(e:any) {
   // }
 
 }
-submitForm() {
-  console.log(this.ourForm.value);
-}
+
 
 radioChanged(val:String){
   
         console.log(val);
 }
 
-submitData(){
+submitForm(){
       if(this.ourForm.value.fullName == '' || this.ourForm.value.couponCode == '' || this.ourForm.value.listedPartner == '' || this.ourForm.value.yn == '') {
         this.displayError = true;
         return;
@@ -168,7 +166,7 @@ submitData(){
         this.submissionForm.add(dataToSave).then(res=>{
           this.submitted=true;
           console.log('Data Added in Database'); 
-           console.log(dataToSave); //now test once
+           console.log(dataToSave); 
         }).catch(err=> console.log(err)
       ).finally(()=>{
         this.submitting=false;
